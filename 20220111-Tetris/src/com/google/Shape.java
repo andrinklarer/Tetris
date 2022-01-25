@@ -7,6 +7,13 @@ public class Shape {
     private int[][] shape;
     private boolean hasRotationPoint;
 
+    /**
+     * This is the constructor, which sets the values of the shape
+     *
+     * @param color            is the shape color
+     * @param shape            are the coordinates of the shape
+     * @param hasRotationPoint is a boolean to determine if the shape can rotate
+     */
     public Shape(Color color, int[][] shape, boolean hasRotationPoint) {
         this.color = color;
         this.shape = shape;

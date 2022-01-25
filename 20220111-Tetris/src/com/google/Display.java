@@ -3,7 +3,6 @@ package com.google;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -30,6 +29,9 @@ public class Display extends JFrame {
     private boolean isPlaying;
     private boolean update;
 
+    /**
+     * This is the constructor, which sets the default values and starts the input controller and auto lower
+     */
     public Display() {
         grid = new FieldElement[PLAYING_FIELD_HEIGHT][PLAYING_FIELD_WIDTH];
         isPlaying = true;
@@ -49,6 +51,9 @@ public class Display extends JFrame {
         manager();
     }
 
+    /**
+     * This method manages the values of the display, which have to be set before the game starts
+     */
     public void manager() {
         setupPlayingField();
         setDefaultValues();
@@ -56,7 +61,10 @@ public class Display extends JFrame {
         play();
     }
 
-    private void loadNextPiece() {
+    /**
+     * This method fills the next piece list and calls the addNewPiece method
+     */
+    public void loadNextPiece() {
         for (SingleShape nextShape : nextShapes) nextShape.setShape(shapeManager.getShape());
         while (nextShapes[nextShapes.length - 1].getShape().equals(nextShapes[nextShapes.length - 2].getShape()))
             nextShapes[nextShapes.length - 1].setShape(shapeManager.getShape());
@@ -64,6 +72,9 @@ public class Display extends JFrame {
         addNewPiece();
     }
 
+    /**
+     * This method sets the default display options and values
+     */
     public void setDefaultValues() {
         JPanel screen = new JPanel(new BorderLayout());
 
@@ -95,6 +106,9 @@ public class Display extends JFrame {
         addKeyListener(inputController);
     }
 
+    /**
+     * This method sets the grid elements to the default values
+     */
     public void setupPlayingField() {
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
@@ -103,6 +117,9 @@ public class Display extends JFrame {
         }
     }
 
+    /**
+     * This method manages the actions that are performed while the game is running
+     */
     public void play() {
         while (isPlaying) {
             try {
@@ -111,13 +128,13 @@ public class Display extends JFrame {
                     case 'A' -> moveLeft();
                     case 's' -> validateMoveDown();
                     case 'S' -> {
-                        if(!hitFloor())score.setScore(score.getScore().get() + 1);
+                        if (!hitFloor()) score.setScore(score.getScore().get() + 1);
                         validateMoveDown();
                     }
                     case 'D' -> moveRight();
                     case 'Q' -> rotate(true);
                     case 'E' -> rotate(false);
-                    case 'W' -> holdSPiece();
+                    case 'W' -> holdPiece();
                     case ' ' -> drop();
                     default -> isPlaying = false;
                 }
@@ -130,8 +147,12 @@ public class Display extends JFrame {
         }
     }
 
-    private void holdSPiece() {
-        if(canHoldShape){
+    /**
+     * This method removes and stores the current (falling) piece and replaces it with the stored piece
+     * or, if the stored piece isn't set, with the next piece
+     */
+    public void holdPiece() {
+        if (canHoldShape) {
             removeCurrentPiece();
             Shape tmpShape = holdShapeComponent.getShape();
             holdShapeComponent.setShape(currentShape);
@@ -145,7 +166,10 @@ public class Display extends JFrame {
         }
     }
 
-    private void removeCurrentPiece() {
+    /**
+     * This method clears the current (falling) piece and replaces it with default values
+     */
+    public void removeCurrentPiece() {
         for (int y = 0; y < grid.length; y++) {
             for (int x = 0; x < grid[0].length; x++) {
                 if (grid[y][x].getValue() == DefaultValues.getValueMovingPiece()
@@ -157,8 +181,10 @@ public class Display extends JFrame {
         }
     }
 
-    //works
-    private void drop() {
+    /**
+     * This method moves the current (falling) piece down until it hits the floor
+     */
+    public void drop() {
         int points = 0;
         while (!hitFloor()) {
             validateMoveDown();
@@ -168,8 +194,12 @@ public class Display extends JFrame {
         score.setScore(score.getScore().get() + points);
     }
 
-    //works
-    private void rotate(boolean isLeftTurn) {
+    /**
+     * This method rotates the current (falling) piece to either side, depending on the parameter
+     *
+     * @param isLeftTurn is a boolean, which is used to determine if the rotation is to the left or right
+     */
+    public void rotate(boolean isLeftTurn) {
         ArrayList<int[]> movingPieces = new ArrayList<>();
         int[] rotationPosition = new int[]{-1};
         FieldElement[][] newField = fieldClone();
@@ -220,8 +250,12 @@ public class Display extends JFrame {
         grid = newField;
     }
 
-    //works
-    private FieldElement[][] fieldClone() {
+    /**
+     * This method makes a copy by the values of the field
+     *
+     * @return is a copy of the current field
+     */
+    public FieldElement[][] fieldClone() {
         FieldElement[][] clone = new FieldElement[PLAYING_FIELD_HEIGHT][PLAYING_FIELD_WIDTH];
 
         for (int y = 0; y < clone.length; y++) {
@@ -233,8 +267,10 @@ public class Display extends JFrame {
         return clone;
     }
 
-    //works
-    private void moveRight() {
+    /**
+     * This method checks if the current (falling) piece can move to the right and if so moves the piece to the right
+     */
+    public void moveRight() {
         FieldElement[][] newField = fieldClone();
         update = true;
 
@@ -259,8 +295,12 @@ public class Display extends JFrame {
         grid = newField;
     }
 
-    //works
-    private void validateMoveDown() {
+    /**
+     * This method checks if the current (falling) piece can move down, if not freezes it in position
+     * and checks if the game is over. If the game isn't over a new piece will be added.
+     * If the piece does not hit the floor, it will be move down
+     */
+    public void validateMoveDown() {
         if (hitFloor()) {
             freezePiece();
             clearRows();
@@ -274,8 +314,10 @@ public class Display extends JFrame {
         }
     }
 
-    //works
-    private void moveLeft() {
+    /**
+     * This method checks if the current (falling) piece can move to the left and if so moves the piece to the left
+     */
+    public void moveLeft() {
         FieldElement[][] newField = fieldClone();
         update = true;
 
@@ -300,8 +342,10 @@ public class Display extends JFrame {
         if (update) grid = newField;
     }
 
-    //works
-    private void moveDown() {
+    /**
+     * This method moves the current (falling) piece down a block
+     */
+    public void moveDown() {
         for (int y = grid.length - 1; y >= 0; y--) {
             for (int x = 0; x < grid[0].length; x++) {
                 if (grid[y][x].getValue() == DefaultValues.getValueMovingPiece()
@@ -317,8 +361,10 @@ public class Display extends JFrame {
         update = true;
     }
 
-    //works
-    private void freezePiece() {
+    /**
+     * This method freezes the current (falling) piece in position
+     */
+    public void freezePiece() {
         for (FieldElement[] fieldRow : grid) {
             for (int x = 0; x < grid[0].length; x++) {
                 if (fieldRow[x].getValue() == DefaultValues.getValueMovingPiece()
@@ -329,8 +375,13 @@ public class Display extends JFrame {
         }
     }
 
-    //works
-    private boolean hitFloor() {
+    /**
+     * This method checks if the current (falling) piece can move down
+     *
+     * @return if the current (falling) piece can move down return false,
+     * if it hit a filled block of the floor returns true
+     */
+    public boolean hitFloor() {
         for (int y = grid.length - 1; y >= 0; y--) {
             for (int x = 0; x < grid[0].length; x++) {
                 if ((grid[y][x].getValue() == DefaultValues.getValueMovingPiece()
@@ -344,8 +395,12 @@ public class Display extends JFrame {
         return false;
     }
 
-    //works
-    private boolean isGameOver() {
+    /**
+     * This method checks if the game is over
+     *
+     * @return if a filled piece is above a specific level returns true else false
+     */
+    public boolean isGameOver() {
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < grid[0].length; x++) {
                 if (grid[y][x].getValue() == DefaultValues.getValueFilled()) {
@@ -356,8 +411,10 @@ public class Display extends JFrame {
         return false;
     }
 
-    //works
-    private void clearRows() {
+    /**
+     * This method checks if the rows are filled and if so clears it
+     */
+    public void clearRows() {
         int counter = 0;
         boolean rowIsCleared = true;
         for (int y = grid.length - 1; y >= 0; y--) {
@@ -377,8 +434,10 @@ public class Display extends JFrame {
         updateDelay();
     }
 
-    //work
-    private void updateDelay() {
+    /**
+     * This method shortens the delay when a certain level is reached
+     */
+    public void updateDelay() {
         if (clearedRows >= 0 && clearedRows < 100) {
             if (autoLower.getTime().get() != DefaultValues.getSpeedVeryEasy()) {
                 autoLower.setTime(DefaultValues.getSpeedVeryEasy());
@@ -403,8 +462,12 @@ public class Display extends JFrame {
 
     }
 
-    //works
-    private void updateScore(int counter) {
+    /**
+     * This method increases the score of the player, depending on the level of the game
+     *
+     * @param counter is the amount of rows cleared
+     */
+    public void updateScore(int counter) {
         int points = 0;
         switch (counter) {
             case 1 -> points = (((int) clearedRows / 10) + 1) * 40;
@@ -416,11 +479,15 @@ public class Display extends JFrame {
             }
         }
         score.setScore(score.getScore().get() + points);
-        score.setLevel(clearedRows/10 + 1);
+        score.setLevel(clearedRows / 10 + 1);
     }
 
-    //works
-    private void moveRowsDown(int currentRow) {
+    /**
+     * This method moves all rows above one row down
+     *
+     * @param currentRow the row which got cleared
+     */
+    public void moveRowsDown(int currentRow) {
         for (int y = currentRow; y > 0; y--) {
             for (int x = 0; x < grid[0].length; x++) {
                 grid[y][x].setValue(grid[y - 1][x].getValue());
@@ -429,10 +496,13 @@ public class Display extends JFrame {
         }
     }
 
-    //works
-    private void addNewPiece() {
+    /**
+     * Adds the piece on top of the next piece row to the field and adds shifts the other pieces up.
+     * The last piece of the list gets generated new.
+     */
+    public void addNewPiece() {
         currentShape = nextShapes[0].getShape();
-        canHoldShape= true;
+        canHoldShape = true;
 
         for (int i = 0; i < nextShapes.length - 1; i++) {
             nextShapes[i].setShape(nextShapes[i + 1].getShape());
@@ -444,7 +514,11 @@ public class Display extends JFrame {
         loadShape();
     }
 
-    private void loadShape() {
+    /**
+     * This method sets the current (falling) piece to the grid
+     * and moves piece down to be visible for the user if possible
+     */
+    public void loadShape() {
         int[] startPosition = new int[]{1, 4};
 
         for (int i = 0; i < currentShape.getShape().length; i++) {

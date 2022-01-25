@@ -10,8 +10,11 @@ public class Score extends JPanel {
     private JLabel scoreLabel;
     private JLabel levelLabel;
 
+    /**
+     * This is the constructor, which sets the default values of the component
+     */
     public Score() {
-        this.setLayout(new GridLayout(1,3));
+        this.setLayout(new GridLayout(1, 3));
 
         score = new AtomicInteger(0);
         level = new AtomicInteger(1);

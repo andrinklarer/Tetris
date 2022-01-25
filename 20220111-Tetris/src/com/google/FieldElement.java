@@ -6,6 +6,12 @@ public class FieldElement {
     private Color color;
     private int value;
 
+    /**
+     * This is the constructor which creates a new Element
+     *
+     * @param color is the color of the element
+     * @param value is the value of the element
+     */
     public FieldElement(Color color, int value) {
         this.color = color;
         this.value = value;

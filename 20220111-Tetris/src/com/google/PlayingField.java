@@ -8,6 +8,11 @@ public class PlayingField extends JPanel {
     private int PLAYING_FIELD_DISPLAY_HEIGHT = 20;
     private int PLAYING_FIELD_DISPLAY_WIDTH = 10;
 
+    /**
+     * This is the constructor, which sets the default display options and playing field
+     *
+     * @param playingField is the playing field, which gets copied
+     */
     public PlayingField(FieldElement[][] playingField) {
         this.playingField = playingField;
 
@@ -20,12 +25,21 @@ public class PlayingField extends JPanel {
         this.requestFocusInWindow();
     }
 
-    //works
+    /**
+     * This method paints the component with the new grid
+     *
+     * @param g is the graphic of the JPanel
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         draw(g);
     }
 
+    /**
+     * This method sets the grid values to the field and adds lines to make the field more visible
+     *
+     * @param g is the graphic of the JPanel
+     */
     public void draw(Graphics g) {
         for (int y = 0; y < playingField.length - 3; y++) {
             for (int x = 0; x < playingField[0].length; x++) {
@@ -49,6 +63,11 @@ public class PlayingField extends JPanel {
         }
     }
 
+    /**
+     * Sets the set playingField to the new / updated playingField and rerenders the component
+     *
+     * @param playingField is the new / updated field
+     */
     public void updateField(FieldElement[][] playingField) {
         this.playingField = playingField;
         paintComponent(this.getGraphics());

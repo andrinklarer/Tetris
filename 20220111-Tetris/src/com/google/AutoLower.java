@@ -8,11 +8,20 @@ public class AutoLower extends Thread {
     private AtomicInteger time;
     private final int START_TIME = 1000;
 
+    /**
+     * This is the constructor, which sets the default values
+     *
+     * @param nextMove is the queue where the key press is added to
+     */
     public AutoLower(BlockingQueue<Integer> nextMove) {
         this.nextMove = nextMove;
         time = new AtomicInteger(START_TIME);
     }
 
+    /**
+     * While the tetris is running, this method adds a key in specific intervals to the list of inputs
+     * to automatically lower the current piece. The intervals change when more rows are cleared.
+     */
     @Override
     public void run() {
         while (this.isAlive()) {
