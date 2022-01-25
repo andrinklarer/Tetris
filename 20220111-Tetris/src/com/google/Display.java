@@ -40,6 +40,8 @@ public class Display extends JFrame {
         nextShapes = new SingleShape[3];
         nextMove = new LinkedBlockingQueue<>();
 
+        new PlaySound();
+
         inputController = new InputController(nextMove);
         inputController.start();
 
