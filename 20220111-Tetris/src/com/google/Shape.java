@@ -3,18 +3,29 @@ package com.google;
 import java.awt.*;
 
 public class Shape {
-    Color color;
-    int[][] shape;
-    String desc;
+    private Color color;
+    private int[][] shape;
+    private boolean hasRotationPoint;
 
-
-    public Shape(int[][] shape, String desc, Color color) {
-        this.shape = shape;
-        this.desc = desc;
+    /**
+     * This is the constructor, which sets the values of the shape
+     *
+     * @param color            is the shape color
+     * @param shape            are the coordinates of the shape
+     * @param hasRotationPoint is a boolean to determine if the shape can rotate
+     */
+    public Shape(Color color, int[][] shape, boolean hasRotationPoint) {
         this.color = color;
+        this.shape = shape;
+        this.hasRotationPoint = hasRotationPoint;
     }
 
-    public Shape() {
+    public boolean isHasRotationPoint() {
+        return hasRotationPoint;
+    }
+
+    public void setHasRotationPoint(boolean hasRotationPoint) {
+        this.hasRotationPoint = hasRotationPoint;
     }
 
     public Color getColor() {
@@ -31,33 +42,5 @@ public class Shape {
 
     public void setShape(int[][] shape) {
         this.shape = shape;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public void setX(int index, int x) {
-
-        this.shape[index][0] = x;
-    }
-
-    public void setY(int index, int y) {
-
-        this.shape[index][1] = y;
-    }
-
-    int x(int index, Shape shape) {
-
-        return shape.getShape()[index][0];
-    }
-
-    int y(int index, Shape shape) {
-
-        return shape.getShape()[index][1];
     }
 }
