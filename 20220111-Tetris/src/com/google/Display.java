@@ -54,6 +54,26 @@ public class Display extends JFrame {
     }
 
     /**
+     * This constructor is used when executed a test to only set the default values and not to start the game.
+     *
+     * @param isTestingConstructor just a boolean because there can't be multiple constructors with the same values.
+     */
+    public Display(boolean isTestingConstructor) {
+        grid = new FieldElement[PLAYING_FIELD_HEIGHT][PLAYING_FIELD_WIDTH];
+        isPlaying = true;
+        clearedRows = 0;
+        canHoldShape = true;
+        nextShapes = new SingleShape[3];
+        nextMove = new LinkedBlockingQueue<>();
+        autoLower = new AutoLower(nextMove);
+        shapeManager = new ShapeManager();
+
+        setupPlayingField();
+        setDefaultValues();
+        loadNextPiece();
+    }
+
+    /**
      * This method manages the values of the display, which have to be set before the game starts
      */
     public void manager() {
@@ -536,5 +556,34 @@ public class Display extends JFrame {
         for (int i = 0; i < 2; i++) {
             if (!hitFloor()) validateMoveDown();
         }
+    }
+
+    //Getter and Setter
+    public FieldElement[][] getGrid() {
+        return grid;
+    }
+
+    public void setGrid(FieldElement[][] grid) {
+        this.grid = grid;
+    }
+
+    public SingleShape getHoldShapeComponent() {
+        return holdShapeComponent;
+    }
+
+    public Shape getCurrentShape() {
+        return currentShape;
+    }
+
+    public void setCurrentShape(Shape currentShape) {
+        this.currentShape = currentShape;
+    }
+
+    public ShapeManager getShapeManager() {
+        return shapeManager;
+    }
+
+    public SingleShape[] getNextShapes() {
+        return nextShapes;
     }
 }
