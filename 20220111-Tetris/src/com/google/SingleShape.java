@@ -10,7 +10,7 @@ public class SingleShape extends JPanel {
     /**
      * This is the constructor, which sets the default values of the display and shape to display
      *
-     * @param shape
+     * @param shape is the shape that's set
      */
     public SingleShape(Shape shape) {
         this.shape = shape;

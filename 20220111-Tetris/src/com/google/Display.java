@@ -23,8 +23,8 @@ public class Display extends JFrame {
     private boolean canHoldShape;
 
     private FieldElement[][] grid;
-    private int PLAYING_FIELD_HEIGHT = 23;
-    private int PLAYING_FIELD_WIDTH = 10;
+    private final int PLAYING_FIELD_HEIGHT = 23;
+    private final int PLAYING_FIELD_WIDTH = 10;
 
     private boolean isPlaying;
     private boolean update;
@@ -192,12 +192,12 @@ public class Display extends JFrame {
      * This method clears the current (falling) piece and replaces it with default values
      */
     public void removeCurrentPiece() {
-        for (int y = 0; y < grid.length; y++) {
+        for (FieldElement[] fieldElements : grid) {
             for (int x = 0; x < grid[0].length; x++) {
-                if (grid[y][x].getValue() == DefaultValues.getValueMovingPiece()
-                        || grid[y][x].getValue() == DefaultValues.getValueRotationPiece()) {
-                    grid[y][x].setColor(DefaultValues.getColorDefault());
-                    grid[y][x].setValue(DefaultValues.getValueDefault());
+                if (fieldElements[x].getValue() == DefaultValues.getValueMovingPiece()
+                        || fieldElements[x].getValue() == DefaultValues.getValueRotationPiece()) {
+                    fieldElements[x].setColor(DefaultValues.getColorDefault());
+                    fieldElements[x].setValue(DefaultValues.getValueDefault());
                 }
             }
         }
@@ -443,6 +443,7 @@ public class Display extends JFrame {
             for (int x = 0; x < grid[0].length; x++) {
                 if (grid[y][x].getValue() != DefaultValues.getValueFilled()) {
                     rowIsCleared = false;
+                    break;
                 }
             }
             if (rowIsCleared) {
@@ -490,12 +491,12 @@ public class Display extends JFrame {
      * @param counter is the amount of rows cleared
      */
     public void updateScore(int counter) {
-        int points = 0;
+        int points;
         switch (counter) {
-            case 1 -> points = (((int) clearedRows / 10) + 1) * 40;
-            case 2 -> points = (((int) clearedRows / 10) + 1) * 100;
-            case 3 -> points = (((int) clearedRows / 10) + 1) * 300;
-            case 4 -> points = (((int) clearedRows / 10) + 1) * 1200;
+            case 1 -> points = ((clearedRows / 10) + 1) * 40;
+            case 2 -> points = ((clearedRows / 10) + 1) * 100;
+            case 3 -> points = ((clearedRows / 10) + 1) * 300;
+            case 4 -> points = ((clearedRows / 10) + 1) * 1200;
             default -> {
                 return;
             }

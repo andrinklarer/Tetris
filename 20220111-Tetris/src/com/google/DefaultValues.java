@@ -3,97 +3,97 @@ package com.google;
 import java.awt.*;
 
 public class DefaultValues {
-    private static Color colorDefault = new Color(0x000);
-    private static Color colorIBlock = new Color(0x00f0f0);
-    private static Color colorJBlock = new Color(0x0000f0);
-    private static Color colorLBlock = new Color(0xf0a000);
-    private static Color colorOBlock = new Color(0xf0f000);
-    private static Color colorSBlock = new Color(0x00f000);
-    private static Color colorTBlock = new Color(0xa000f0);
-    private static Color colorZBlock = new Color(0xf00000);
+    private final static Color COLOR_DEFAULT = new Color(0x000);
+    private final static Color COLOR_I_BLOCK = new Color(0x00f0f0);
+    private final static Color COLOR_J_BLOCK = new Color(0x0000f0);
+    private final static Color COLOR_L_BLOCK = new Color(0xf0a000);
+    private final static Color COLOR_O_BLOCK = new Color(0xf0f000);
+    private final static Color COLOR_S_BLOCK = new Color(0x00f000);
+    private final static Color COLOR_T_BLOCK = new Color(0xa000f0);
+    private final static Color COLOR_Z_BLOCK = new Color(0xf00000);
 
-    private static Integer valueDefault = 0;
-    private static Integer valueFilled = 1;
-    private static Integer valueMovingPiece = 2;
-    private static Integer valueRotationPiece = 3;
+    private final static Integer VALUE_DEFAULT = 0;
+    private final static Integer VALUE_FILLED = 1;
+    private final static Integer VALUE_MOVING_PIECE = 2;
+    private final static Integer VALUE_ROTATION_PIECE = 3;
 
-    private static Integer speedVeryEasy = 1000;
-    private static Integer speedEasy = 750;
-    private static Integer speedMedium = 500;
-    private static Integer speedHard = 300;
-    private static Integer speedVeryHard = 150;
+    private final static Integer SPEED_VERY_EASY = 1000;
+    private final static Integer SPEED_EASY = 750;
+    private final static Integer SPEED_MEDIUM = 500;
+    private final static Integer SPEED_HARD = 300;
+    private final static Integer SPEED_VERY_HARD = 150;
 
-    private static Integer unitSize = 25;
+    private final static Integer UNIT_SIZE = 25;
 
     public static Color getColorDefault() {
-        return colorDefault;
+        return COLOR_DEFAULT;
     }
 
     public static Color getColorIBlock() {
-        return colorIBlock;
+        return COLOR_I_BLOCK;
     }
 
     public static Color getColorJBlock() {
-        return colorJBlock;
+        return COLOR_J_BLOCK;
     }
 
     public static Color getColorLBlock() {
-        return colorLBlock;
+        return COLOR_L_BLOCK;
     }
 
     public static Color getColorOBlock() {
-        return colorOBlock;
+        return COLOR_O_BLOCK;
     }
 
     public static Color getColorSBlock() {
-        return colorSBlock;
+        return COLOR_S_BLOCK;
     }
 
     public static Color getColorTBlock() {
-        return colorTBlock;
+        return COLOR_T_BLOCK;
     }
 
     public static Color getColorZBlock() {
-        return colorZBlock;
+        return COLOR_Z_BLOCK;
     }
 
     public static Integer getValueDefault() {
-        return valueDefault;
+        return VALUE_DEFAULT;
     }
 
     public static Integer getValueFilled() {
-        return valueFilled;
+        return VALUE_FILLED;
     }
 
     public static Integer getValueMovingPiece() {
-        return valueMovingPiece;
+        return VALUE_MOVING_PIECE;
     }
 
     public static Integer getValueRotationPiece() {
-        return valueRotationPiece;
+        return VALUE_ROTATION_PIECE;
     }
 
     public static Integer getSpeedVeryEasy() {
-        return speedVeryEasy;
+        return SPEED_VERY_EASY;
     }
 
     public static Integer getSpeedEasy() {
-        return speedEasy;
+        return SPEED_EASY;
     }
 
     public static Integer getSpeedMedium() {
-        return speedMedium;
+        return SPEED_MEDIUM;
     }
 
     public static Integer getSpeedHard() {
-        return speedHard;
+        return SPEED_HARD;
     }
 
     public static Integer getSpeedVeryHard() {
-        return speedVeryHard;
+        return SPEED_VERY_HARD;
     }
 
     public static Integer getUnitSize() {
-        return unitSize;
+        return UNIT_SIZE;
     }
 }

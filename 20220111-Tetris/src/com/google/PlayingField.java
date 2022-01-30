@@ -5,8 +5,8 @@ import java.awt.*;
 
 public class PlayingField extends JPanel {
     private FieldElement[][] playingField;
-    private int PLAYING_FIELD_DISPLAY_HEIGHT = 20;
-    private int PLAYING_FIELD_DISPLAY_WIDTH = 10;
+    private final int PLAYING_FIELD_DISPLAY_HEIGHT = 20;
+    private final int PLAYING_FIELD_DISPLAY_WIDTH = 10;
 
     /**
      * This is the constructor, which sets the default display options and playing field
